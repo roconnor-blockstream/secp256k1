@@ -3115,6 +3115,17 @@ void test_ge(void) {
         ge_equals_gej(&ge[i], &gej[i]);
     }
 
+    /* Test batch gej -> ge conversion with all infinities. */
+    for (i = 0; i < 4 * runs + 1; i++) {
+        secp256k1_gej_set_infinity(&gej[i]);
+    }
+    /* batch invert */
+    secp256k1_ge_set_all_gej_var(ge, gej, 4 * runs + 1);
+    /* check result */
+    for (i = 0; i < 4 * runs + 1; i++) {
+        ge_equals_gej(&ge[i], &gej[i]);
+    }
+
     free(ge);
     free(gej);
 }
