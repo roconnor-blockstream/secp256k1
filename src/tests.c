@@ -3103,8 +3103,13 @@ void test_ge(void) {
     for (i = 0; i < 4 * runs + 1; i++) {
         random_group_element_test(&ge[i]);
         /* randomly set half the points to infinity */
-        if(secp256k1_fe_is_odd(&ge[i].x)) {
-            secp256k1_ge_set_infinity(&ge[i]);
+        if (secp256k1_fe_is_odd(&ge[i].x) == i % 2) {
+          secp256k1_ge_set_infinity(&ge[i]);
+        }
+        int odd = secp256k1_fe_is_odd(&ge[i].x);
+        CHECK(odd == 0 || odd == 1);
+        if (!!secp256k1_fe_is_odd(&ge[i].x) == i % 2) {
+          secp256k1_ge_set_infinity(&ge[i]);
         }
         secp256k1_gej_set_ge(&gej[i], &ge[i]);
     }
