@@ -66,6 +66,7 @@ Properties that will become important later:
 - Performing more divsteps than needed is not a problem, as *f* does not change anymore after *g=0*.
 - Only even numbers are divided by *2*. This means that when reasoning about it algebraically we
   do not need to worry about rounding.
+- The maximum magnitude of *f* and *g*, *max(|f|, |g|)*, is never increased by divstep.
 - At every point during the algorithm's execution the next *N* steps only depend on the bottom *N*
   bits of *f* and *g*, and on *&delta;*.
 
